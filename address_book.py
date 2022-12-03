@@ -1,7 +1,7 @@
 
 class User:
 
-    def add_user(self, first_name, last_name, dict):
+    def add_user(self, first_name, last_name, address, city, state, zip_code, phone_no, email, dict):
         '''
             add new user 
             give user input as first and last name
@@ -10,7 +10,7 @@ class User:
         
         key = len(dict)+1   
         if key not in dict.keys():
-            dict.update({key : {"first_name" : first_name, "last_name": last_name}}) 
+            dict.update({key : {"first_name" : first_name, "last_name" : last_name, "address" : address, "city" : city, "state" : state, "zip_code" : zip_code, "phone_no" : phone_no, "email" : email}}) 
         return dict
 
     def edit_user(self, first_name, dict):
@@ -36,6 +36,21 @@ class User:
                 del dict[key]
                 return dict      
 
+    def check_unique_first_name(self, first_name, dic):
+        '''
+            check unique name in dictionary
+            give user input as first name and dictionary name
+            return unique name present or not
+        '''
+        fn_list = []
+        for key, values in dic.items():
+            fn_list.append(values["first_name"]) 
+
+        if first_name not in fn_list:
+            return first_name
+        else:
+            return "first name alredy present"       
+
 
 class Multiplebook():
 
@@ -51,7 +66,12 @@ class Multiplebook():
             return adressbook_name
 
     def clear_person_dict(self, dict):
-        persons = dict.clear()
+        '''
+            delete all person in address book 
+            dictionary
+            return string 
+        '''
+        dict.clear()
         return "Clear all present persons sucessfully"
 
 
@@ -63,7 +83,8 @@ if __name__ == "__main__":
 
     ## BOOKS / Dictionary
     new_multiple_addbook = {}
-    addbook = {1: {'first_name': 'vipul', 'last_name': 'shete'}, 2: {'first_name': 'vaibhav', 'last_name': 'joishi'}}
+    # addbook = {1: {'first_name': 'vipul', 'last_name': 'shete'}, 2: {'first_name': 'vaibhav', 'last_name': 'joishi'}}
+    addbook = {}
 
     while True:
 
@@ -81,10 +102,23 @@ if __name__ == "__main__":
 
         if choice == 1:
             ## add new user
+            
             first_name = input("Enter first name: ")
-            last_name = input("Enter last name: ")
+            fname =  user.check_unique_first_name(first_name, addbook)
+            
+            if first_name == fname:
+                last_name = input("Enter last name: ")
+                address = input("Enter address: ")
+                city = input("Enter city: ")
+                state = input("Enter state: ")
+                zip_code = int(input("Enter zip_code: "))
+                phone_no = int(input("Enter phone_no: "))
+                email = input("Enter email: ")
 
-            print (user.add_user(first_name, last_name, addbook))
+                print (user.add_user(first_name, last_name, address, city, state, zip_code, phone_no, email, addbook))
+
+            else:
+                print("Please enter unique first name") 
 
         if choice == 2:
             ## edit last name
