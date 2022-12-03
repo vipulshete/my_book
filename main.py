@@ -25,6 +25,7 @@ if __name__ == "__main__":
         print("8. Search by city or state")
         print("9. View dictionar of city or state wise persons")
         print("10. Count by city or state")
+        print("11. Address book sort by parameter")
 
         print("To exit select 0" + "\n")
 
@@ -129,5 +130,14 @@ if __name__ == "__main__":
                 state_dict = multiplebook.dict_of_state_persons(new_multiple_addbook)
                 print(multiplebook.group_by(state_dict))         
 
+        elif choice == 11:
+        ## Address book sort by parameter
+
+            print("Address book sort by parameter")
+            address_book_name = input("Enter the address book name: ")
+            parameter = input("Enter sort by parameter: ")
+
+            print(multiplebook.sorting_parameter(new_multiple_addbook, address_book_name, parameter))
+            
         elif choice == 0:
             break

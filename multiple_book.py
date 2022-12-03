@@ -85,3 +85,19 @@ class Multiplebook():
             key_count.update({key : len(values)}) 
 
         return key_count 
+
+    def sorting_parameter(self, my_book, addbook_name, parameter):
+    
+        sorted_entries = {}
+        person_list = []
+        for key, value in my_book.items():
+            if key == addbook_name:       
+                for key1, value1 in value.items():
+                    person_list.append(value1) 
+                    
+        sorted_list = sorted(person_list, key = lambda a: a[parameter])
+        
+        for i in range(0, len(sorted_list)):
+            sorted_entries.update({i+1 : sorted_list[i]})
+            
+        return sorted_entries 
