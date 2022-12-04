@@ -1,3 +1,8 @@
+import json
+import csv
+import pandas as pd
+
+
 class Multiplebook():
 
     def add_my_book(self,dict, adressbook_name, persons):
@@ -101,3 +106,55 @@ class Multiplebook():
             sorted_entries.update({i+1 : sorted_list[i]})
             
         return sorted_entries 
+
+    def write_text_file(self, dict, file_name):
+
+        with open(f"{file_name}.txt", "w") as text_file:
+            text_file.write(str(dict))  
+
+        return f"file create sucessfull + {file_name}"
+
+    def read_text_file(self, file_path):
+        try:
+            with open(file_path) as text_file:
+                content = text_file.read()
+                return content
+
+        except FileNotFoundError:
+            print("File not Found")        
+
+    def write_in_json(self, my_book, file_name):
+
+        with open(f"{file_name}.json", "w") as json_file:
+                json.dump(my_book, json_file, indent = 2)
+
+
+    def read_json_file(self, file_paath):
+        try:
+            with open(file_paath, "r") as json_file:
+                content = json.load(json_file)
+            return content
+
+        except FileNotFoundError:
+            print("File not Found")
+
+    def write_in_csv(self, my_book, file_name):
+
+        with open(f'{file_name}.csv', "a") as csv_file:    
+            fields = ['book_name', 'sr_no', 'first_name' , 'last_name' , 'address', 'city' , 'state' , 'zip_code' , 'phone_no' , 'email']
+            csv_writer = csv.writer(csv_file)
+            csv_writer.writerow(fields)
+            
+            for book_name, persons in my_book.items():
+                for sr_no, detail in persons.items():
+                    data = [book_name, sr_no, detail['first_name'], detail['last_name'], detail['address'], detail['city'], detail['state'], detail['zip_code'], detail['phone_no'], detail['email']]                  
+                    csv_writer.writerow(data)
+
+    def read_csv_file(self, file_paath):
+        try:
+            with open(file_paath, "r") as csv_file:
+                data = pd.read_csv(csv_file)
+                print(data)
+
+        except FileNotFoundError:
+            print("File not Found")

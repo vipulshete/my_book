@@ -1,5 +1,6 @@
 from address_book import User
 from multiple_book import Multiplebook
+import json
 
 
 if __name__ == "__main__":
@@ -26,6 +27,12 @@ if __name__ == "__main__":
         print("9. View dictionar of city or state wise persons")
         print("10. Count by city or state")
         print("11. Address book sort by parameter")
+        print("12. Write addbooks in text formate")
+        print("13. Read addbooks text file")
+        print("14. Write addbooks in json formate")
+        print("15. Read addbooks json file")
+        print("16. Write addbooks in csv formate")
+        print("17. Read addbooks csv file")
 
         print("To exit select 0" + "\n")
 
@@ -138,6 +145,42 @@ if __name__ == "__main__":
             parameter = input("Enter sort by parameter: ")
 
             print(multiplebook.sorting_parameter(new_multiple_addbook, address_book_name, parameter))
+
+        elif choice == 12:
+        ## write dictionary as text file formate
+
+            file_name = input("Enter the file name or path of address book: ")
+            print(multiplebook.write_text_file(new_multiple_addbook, file_name))
+
+        elif choice == 13:
+        ## Read dictionary in text file.
+
+            file_path = input("Enter the file name or path of address book: ")
+            print(multiplebook.read_text_file(file_path))    
+            
+        elif choice == 14:
+        ## write dictionary as json file formate
+
+            file_name = input("Enter the file name or path of address book: ")
+            print(multiplebook.write_in_json(new_multiple_addbook, file_name))
+
+        elif choice == 15:
+        ## Read dictionary in json file.
+
+            file_path = input("Enter the file name or path of address book: ")
+            print(multiplebook.read_json_file(file_path)) 
+
+        elif choice == 16:
+        ## write dictionary as csv file formate
+
+            file_name = input("Enter the file name or path of address book: ")
+            print(multiplebook.write_in_csv(new_multiple_addbook, file_name))
+
+        elif choice == 17:
+        ## Read dictionary in csv file.
+
+            file_path = input("Enter the file name or path of address book: ")
+            print(multiplebook.read_csv_file(file_path))     
             
         elif choice == 0:
             break
