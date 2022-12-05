@@ -11,7 +11,7 @@ class User:
         key = len(dict)+1   
         if key not in dict.keys():
             dict.update({key : {"first_name" : first_name, "last_name" : last_name, "address" : address, "city" : city, "state" : state, "zip_code" : zip_code, "phone_no" : phone_no, "email" : email}}) 
-        return dict
+            return dict
 
     def edit_user(self, first_name, dict):
         '''
@@ -74,6 +74,17 @@ class Multiplebook():
         dict.clear()
         return "Clear all present persons sucessfully"
 
+    # def add_person_in_perticulare_addressbook(self, dict, book_name):
+
+    #     for book_name_key, persons in dict.items():
+    #         if book_name == book_name_key:
+
+    #             book_name_key.update({key : {person_details}})
+    #          for book_key, book_value in my_book.items():
+    #             for person_key, person_value in book_value.items():
+    #                 if person_value["state"] == state:
+    #                     print(person_value) 
+
 
 if __name__ == "__main__":
 
@@ -82,8 +93,7 @@ if __name__ == "__main__":
     multiplebook = Multiplebook()
 
     ## BOOKS / Dictionary
-    new_multiple_addbook = {}
-    # addbook = {1: {'first_name': 'vipul', 'last_name': 'shete'}, 2: {'first_name': 'vaibhav', 'last_name': 'joishi'}}
+    new_multiple_addbook = {'self_book': {1: {'first_name': 'vipul', 'last_name': 'shete', 'address': 'raygad', 'city': 'beed', 'state': 'maha', 'zip_code': 123, 'phone_no': 1254685, 'email': 'vipulshea55652'}, 2: {'first_name': 'renu', 'last_name': 'gonde', 'address': 'raygad', 'city': 'kaij', 'state': 'maha', 'zip_code': 45, 'phone_no': 25454, 'email': 'asdsf'}}, 'brother_book': {1: {'first_name': 'vaibhav', 'last_name': 'shete', 'address': 'sds', 'city': 'pune', 'state': 'hyd', 'zip_code': 546, 'phone_no': 255468, 'email': 'dsda'}}}
     addbook = {}
 
     while True:
@@ -115,7 +125,23 @@ if __name__ == "__main__":
                 phone_no = int(input("Enter phone_no: "))
                 email = input("Enter email: ")
 
-                print (user.add_user(first_name, last_name, address, city, state, zip_code, phone_no, email, addbook))
+
+                print("\n" + "Add user in perticular address book")
+                print("1. Yes")
+                print("2. No")
+
+                select = int(input("Select the option"))
+
+                if select == 1:
+
+                    book_name = input("Enter address book name: ")
+                    for book_name_key, persons in new_multiple_addbook.items():
+                        if book_name_key == book_name:
+                            print (user.add_user(first_name, last_name, address, city, state, zip_code, phone_no, email, persons))
+
+                if select == 2:
+                    print (user.add_user(first_name, last_name, address, city, state, zip_code, phone_no, email, addbook))
+
 
             else:
                 print("Please enter unique first name") 
