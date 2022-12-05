@@ -15,7 +15,7 @@ if __name__ == "__main__":
 
     while True:
 
-        print("\n" + "1. To Add user")
+        print("\n" + "1. Add user")
         print("2. Edit last name using first name")
         print("3. delete user using first name")
         print("4. view current address book")
@@ -44,8 +44,26 @@ if __name__ == "__main__":
                 zip_code = int(input("Enter zip_code: "))
                 phone_no = int(input("Enter phone_no: "))
                 email = input("Enter email: ")
+                
+                if len(new_multiple_addbook) >= 1:
+                    print("\n" + "Add user in perticular address book")
+                    print("1. Yes")
+                    print("2. No")
 
-                print (user.add_user(first_name, last_name, address, city, state, zip_code, phone_no, email, addbook))
+                    select = int(input("Select the option: "))
+
+                    if select == 1:
+
+                        book_name = input("Enter address book name: ")
+                        for book_name_key, persons in new_multiple_addbook.items():
+                            if book_name_key == book_name:
+                                print (user.add_user(first_name, last_name, address, city, state, zip_code, phone_no, email, persons))
+
+                    if select == 2:
+                        print (user.add_user(first_name, last_name, address, city, state, zip_code, phone_no, email, addbook))
+                
+                else:
+                    print (user.add_user(first_name, last_name, address, city, state, zip_code, phone_no, email, addbook))
 
             else:
                 print("Please enter unique first name") 
